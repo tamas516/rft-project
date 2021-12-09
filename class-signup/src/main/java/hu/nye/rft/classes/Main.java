@@ -1,6 +1,11 @@
 package hu.nye.rft.classes;
 
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
 import java.sql.*;
+
+import hu.nye.rft.classes.service.Login;
+import hu.nye.rft.classes.service.UserInputReader.UserInputReader;
 
 /**
  * My <b>class</b>.
@@ -15,16 +20,15 @@ public class Main {
      */
     public static void main(String[] args) throws SQLException {
 
-        Connection connection= DriverManager.getConnection("jdbc:h2:tcp://localhost/./rft-class","sa","123");
+        BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(System.in));
+        UserInputReader userInputReader=new UserInputReader(bufferedReader);
+        Login login=new Login(userInputReader);
+        String[] ds= login.isTeacher();
 
-        String query="INSERT INTO REGISTRATION (NAME, PASSWORD, IS_TEACHER) VALUES (?, ?, ?)";
-
-        PreparedStatement preparedStatement = connection.prepareStatement(query);
-
-        preparedStatement.setString(1, "Joe");
-        preparedStatement.setString(2, "asd");
-        preparedStatement.setString(3, "1");
-        preparedStatement.executeUpdate();
+        for(String s:ds)
+        {
+            System.out.println(s);
+        }
     }
 
 }
