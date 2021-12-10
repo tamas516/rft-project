@@ -4,7 +4,10 @@ import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.sql.*;
 
+import hu.nye.rft.classes.model.RegDatas;
 import hu.nye.rft.classes.service.Login;
+import hu.nye.rft.classes.service.SubjectApplication;
+import hu.nye.rft.classes.service.SubjectUpload;
 import hu.nye.rft.classes.service.UserInputReader.UserInputReader;
 
 /**
@@ -22,13 +25,25 @@ public class Main {
 
         BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(System.in));
         UserInputReader userInputReader=new UserInputReader(bufferedReader);
-        Login login=new Login(userInputReader);
-        String[] ds= login.isTeacher();
+        System.out.println("Need a username and a password! ");
+        RegDatas regDatas=new RegDatas(null,null);
+        Login login=new Login(userInputReader, regDatas);
+        login.LoginMethod();
+        SubjectUpload subjectUpload=new SubjectUpload(userInputReader, regDatas);
 
-        for(String s:ds)
-        {
-            System.out.println(s);
+        if(regDatas.getIs_teacher().equals("TRUE")) {
+            subjectUpload.subUpload();
         }
+
+
+        SubjectApplication subjectApplication=new SubjectApplication(userInputReader, regDatas);
+
+        if(regDatas.getIs_teacher().equals("FALSE")) {
+            subjectApplication.apply();
+        }
+
+
+
     }
 
 }

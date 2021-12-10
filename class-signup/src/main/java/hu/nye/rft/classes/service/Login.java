@@ -4,6 +4,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+import hu.nye.rft.classes.model.RegDatas;
 import hu.nye.rft.classes.service.UserInputReader.UserInputReader;
 
 public class Login extends DbConnect{
@@ -11,25 +12,41 @@ public class Login extends DbConnect{
     static final String LOGIN = "SELECT * FROM REGISTRATION WHERE NAME=? AND PASSWORD=?;";
 
     private final UserInputReader userInputReader;
+    private final RegDatas regDatas;
 
-
-    public Login(UserInputReader userInputReader) {
+    public Login(UserInputReader userInputReader, RegDatas regDatas) {
         this.userInputReader = userInputReader;
+        this.regDatas = regDatas;
     }
 
-    public String[] isTeacher() throws SQLException {
+    public void LoginMethod() throws SQLException {
 
         PreparedStatement preparedStatement=con.prepareStatement(LOGIN);
-        preparedStatement.setString(1, userInputReader.readInput());
-        preparedStatement.setString(2, userInputReader.readInput());
+        String name = userInputReader.readInput();
+        String pass = userInputReader.readInput();
+        preparedStatement.setString(1, name);
+        preparedStatement.setString(2, pass);
         ResultSet resultSet = preparedStatement.executeQuery();
 
-        String user = resultSet.getString(1);
-        String pass = resultSet.getString(2);
+        String nameDb="";
+        String passDb="";
+        String reg_idDb="";
+        String isTeachDb="";
 
-        String[] log = {user, pass};
+        while (resultSet.next()) {
+            nameDb=resultSet.getString(2);
+            passDb=resultSet.getString(3);
+            reg_idDb=resultSet.getString(1);
+            isTeachDb=resultSet.getString(4);
+        }
 
-        return log;
+        if(nameDb.equals(name) && passDb.equals(pass)) {
+            regDatas.setIs_teacher(isTeachDb);
+            regDatas.setReg_id(reg_idDb);
+        }
+        else {
+            throw new SQLException();
+        }
 
     }
 }

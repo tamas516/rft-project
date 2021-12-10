@@ -4,22 +4,28 @@ import java.util.Objects;
 
 public class RegDatas {
 
-    private final String name;
-    private final String password;
-    private final String is_teacher;
 
-    public RegDatas(String name, String password, String is_teacher) {
-        this.name = name;
-        this.password = password;
+
+    private String reg_id;
+
+    private String is_teacher;
+
+    public RegDatas(String reg_id, String is_teacher) {
+        this.reg_id = reg_id;
         this.is_teacher = is_teacher;
     }
 
-    public String getName() {
-        return name;
+    public void setReg_id(String reg_id) {
+        this.reg_id = reg_id;
     }
 
-    public String getPassword() {
-        return password;
+    public void setIs_teacher(String is_teacher) {
+        this.is_teacher = is_teacher;
+    }
+
+
+    public String getReg_id() {
+        return reg_id;
     }
 
     public String getIs_teacher() {
@@ -31,19 +37,18 @@ public class RegDatas {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         RegDatas regDatas = (RegDatas) o;
-        return Objects.equals(name, regDatas.name) && Objects.equals(password, regDatas.password) && Objects.equals(is_teacher, regDatas.is_teacher);
+        return  Objects.equals(reg_id, regDatas.reg_id) && Objects.equals(is_teacher, regDatas.is_teacher);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(name, password, is_teacher);
+        return Objects.hash(reg_id, is_teacher);
     }
 
     @Override
     public String toString() {
         return "RegDatas{" +
-                "name='" + name + '\'' +
-                ", password='" + password + '\'' +
+                ", reg_id='" + reg_id + '\'' +
                 ", is_teacher='" + is_teacher + '\'' +
                 '}';
     }
