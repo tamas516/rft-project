@@ -34,4 +34,4 @@ jobs:
 
       # Runs a set of commands using the runners shell
       - name: GitHub Actions build Maven project
-        run:  mvn -B clean install --file pom.xml
+        run:  mvn -B clean install --file class-signup/pom.xml
