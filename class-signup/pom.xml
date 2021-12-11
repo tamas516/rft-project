@@ -86,7 +86,7 @@
                     <excludes>
                         <exclude>hu/nye/rft/classes/model/*</exclude>
                         <exclude>hu/nye/rft/classes/Main.*</exclude>
-                        <exclude>hu/nye/rft/classes/ui/PrintWrapper.*</exclude>
+                        <exclude>hu/nye/rft/classes/service/DbConnect.*</exclude>
                     </excludes>
                 </configuration>
                 <executions>

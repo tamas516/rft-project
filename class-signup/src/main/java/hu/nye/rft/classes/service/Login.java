@@ -29,7 +29,7 @@ public class Login extends DbConnect {
      *
      */
 
-    public void Loginmethod() throws SQLException {
+    public void logmethod() throws SQLException {
 
         PreparedStatement preparedStatement = con.prepareStatement(LOGIN);
         String name = userInputReader.readInput();

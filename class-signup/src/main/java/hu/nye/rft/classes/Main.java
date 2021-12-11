@@ -28,7 +28,7 @@ public class Main {
         System.out.println("Need a username and a password! ");
         RegDatas regDatas = new RegDatas(null, null);
         Login login = new Login(userInputReader, regDatas);
-        login.Loginmethod();
+        login.logmethod();
         SubjectUpload subjectUpload = new SubjectUpload(userInputReader, regDatas);
 
         if (regDatas.getIsteacher().equals("TRUE")) {
