@@ -4,9 +4,14 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
 import hu.nye.rft.classes.model.RegDatas;
-import hu.nye.rft.classes.service.UserInputReader.UserInputReader;
+import hu.nye.rft.classes.service.userinputreader.UserInputReader;
 
-public class SubjectUpload extends DbConnect{
+/**
+ * My <b>class</b>.
+ *
+ */
+
+public class SubjectUpload extends DbConnect {
 
     static final String UPLOAD = "INSERT INTO SUBJECT (NAME,REG_ID) VALUES (?,?);";
 
@@ -18,20 +23,24 @@ public class SubjectUpload extends DbConnect{
         this.regDatas = regDatas;
     }
 
+    /**
+     * My <b>class</b>.
+     *
+     */
+
     public void subUpload() throws SQLException {
 
-        String isTeach=regDatas.getIs_teacher();
-        String reg_id=regDatas.getReg_id();
+        String isTeach = regDatas.getIsteacher();
+        String regid = regDatas.getRegid();
 
-        if(isTeach.equals("TRUE")){
+        if (isTeach.equals("TRUE")) {
             System.out.println("Need a subject name! ");
-            PreparedStatement preparedStatement=con.prepareStatement(UPLOAD);
+            PreparedStatement preparedStatement = con.prepareStatement(UPLOAD);
             preparedStatement.setString(1, userInputReader.readInput());
-            preparedStatement.setString(2, reg_id);
+            preparedStatement.setString(2, regid);
             preparedStatement.executeUpdate();
             System.out.println("Upload is successful! ");
-        }
-        else {
+        } else {
             System.out.println("User is not teacher! ");
         }
 

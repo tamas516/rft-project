@@ -1,7 +1,12 @@
-package hu.nye.rft.classes.service.UserInputReader;
+package hu.nye.rft.classes.service.userinputreader;
 
 import java.io.BufferedReader;
 import java.io.IOException;
+
+/**
+ * My <b>class</b>.
+ *
+ */
 
 public class UserInputReader {
 
@@ -11,7 +16,12 @@ public class UserInputReader {
         this.reader = reader;
     }
 
-    public String readInput(){
+    /**
+     * My <b>class</b>.
+     *
+     */
+
+    public String readInput() {
         String input = null;
 
         try {

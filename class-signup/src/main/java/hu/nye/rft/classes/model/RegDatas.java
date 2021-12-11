@@ -2,54 +2,61 @@ package hu.nye.rft.classes.model;
 
 import java.util.Objects;
 
+/**
+ * My <b>class</b>.
+ *
+ */
+
 public class RegDatas {
 
+    private String regid;
 
+    private String isteacher;
 
-    private String reg_id;
-
-    private String is_teacher;
-
-    public RegDatas(String reg_id, String is_teacher) {
-        this.reg_id = reg_id;
-        this.is_teacher = is_teacher;
+    public RegDatas(String regid, String isteacher) {
+        this.regid = regid;
+        this.isteacher = isteacher;
     }
 
-    public void setReg_id(String reg_id) {
-        this.reg_id = reg_id;
+    public void setRegid(String regid) {
+        this.regid = regid;
     }
 
-    public void setIs_teacher(String is_teacher) {
-        this.is_teacher = is_teacher;
+    public void setIsteacher(String isteacher) {
+        this.isteacher = isteacher;
     }
 
 
-    public String getReg_id() {
-        return reg_id;
+    public String getRegid() {
+        return regid;
     }
 
-    public String getIs_teacher() {
-        return is_teacher;
+    public String getIsteacher() {
+        return isteacher;
     }
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
         RegDatas regDatas = (RegDatas) o;
-        return  Objects.equals(reg_id, regDatas.reg_id) && Objects.equals(is_teacher, regDatas.is_teacher);
+        return  Objects.equals(regid, regDatas.regid) && Objects.equals(isteacher, regDatas.isteacher);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(reg_id, is_teacher);
+        return Objects.hash(regid, isteacher);
     }
 
     @Override
     public String toString() {
         return "RegDatas{" +
-                ", reg_id='" + reg_id + '\'' +
-                ", is_teacher='" + is_teacher + '\'' +
+                ", reg_id='" + regid + '\'' +
+                ", is_teacher='" + isteacher + '\'' +
                 '}';
     }
 }

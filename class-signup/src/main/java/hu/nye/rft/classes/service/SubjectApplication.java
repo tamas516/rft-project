@@ -5,9 +5,14 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import hu.nye.rft.classes.model.RegDatas;
-import hu.nye.rft.classes.service.UserInputReader.UserInputReader;
+import hu.nye.rft.classes.service.userinputreader.UserInputReader;
 
-public class SubjectApplication extends DbConnect{
+/**
+ * My <b>class</b>.
+ *
+ */
+
+public class SubjectApplication extends DbConnect {
 
     static final String CHOOSE = "SELECT * FROM SUBJECT WHERE NAME=?;";
     static final String APPLICATION = "INSERT INTO SIGNUP (REG_ID,SUB_ID) VALUES (?,?);";
@@ -20,15 +25,20 @@ public class SubjectApplication extends DbConnect{
         this.regDatas = regDatas;
     }
 
+    /**
+     * My <b>class</b>.
+     *
+     */
+
     public String chooseSubject() throws SQLException {
 
-        String subName= userInputReader.readInput();
+        String subName = userInputReader.readInput();
 
-        PreparedStatement preparedStatement= con.prepareStatement(CHOOSE);
-        preparedStatement.setString(1,subName);
+        PreparedStatement preparedStatement = con.prepareStatement(CHOOSE);
+        preparedStatement.setString(1, subName);
         ResultSet resultSet = preparedStatement.executeQuery();
 
-        String subIdDb="";
+        String subIdDb = "";
 
         while (resultSet.next()) {
             subIdDb = resultSet.getString(1);
@@ -37,22 +47,26 @@ public class SubjectApplication extends DbConnect{
         return subIdDb;
     }
 
+    /**
+     * My <b>class</b>.
+     *
+     */
+
     public void apply() throws SQLException {
 
         System.out.println("Choose a subject!");
-        String sub_id=chooseSubject();
+        String subid = chooseSubject();
 
-        String isTeach=regDatas.getIs_teacher();
-        String reg_id=regDatas.getReg_id();
+        String isTeach = regDatas.getIsteacher();
+        String regid = regDatas.getRegid();
 
-        if(isTeach.equals("FALSE")) {
-        PreparedStatement preparedStatement= con.prepareStatement(APPLICATION);
-        preparedStatement.setString(1,reg_id);
-        preparedStatement.setString(2,sub_id);
+        if (isTeach.equals("FALSE")) {
+        PreparedStatement preparedStatement = con.prepareStatement(APPLICATION);
+        preparedStatement.setString(1, regid);
+        preparedStatement.setString(2, subid);
             preparedStatement.executeUpdate();
             System.out.println("Application is successful! ");
-        }
-        else {
+        } else {
             System.out.println("User is not a student! ");
         }
     }

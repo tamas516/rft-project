@@ -5,9 +5,14 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import hu.nye.rft.classes.model.RegDatas;
-import hu.nye.rft.classes.service.UserInputReader.UserInputReader;
+import hu.nye.rft.classes.service.userinputreader.UserInputReader;
 
-public class Login extends DbConnect{
+/**
+ * My <b>class</b>.
+ *
+ */
+
+public class Login extends DbConnect {
 
     static final String LOGIN = "SELECT * FROM REGISTRATION WHERE NAME=? AND PASSWORD=?;";
 
@@ -19,32 +24,36 @@ public class Login extends DbConnect{
         this.regDatas = regDatas;
     }
 
-    public void LoginMethod() throws SQLException {
+    /**
+     * My <b>class</b>.
+     *
+     */
 
-        PreparedStatement preparedStatement=con.prepareStatement(LOGIN);
+    public void Loginmethod() throws SQLException {
+
+        PreparedStatement preparedStatement = con.prepareStatement(LOGIN);
         String name = userInputReader.readInput();
         String pass = userInputReader.readInput();
         preparedStatement.setString(1, name);
         preparedStatement.setString(2, pass);
         ResultSet resultSet = preparedStatement.executeQuery();
 
-        String nameDb="";
-        String passDb="";
-        String reg_idDb="";
-        String isTeachDb="";
+        String nameDb = "";
+        String passDb = "";
+        String regiddb = "";
+        String isTeachDb = "";
 
         while (resultSet.next()) {
-            nameDb=resultSet.getString(2);
-            passDb=resultSet.getString(3);
-            reg_idDb=resultSet.getString(1);
-            isTeachDb=resultSet.getString(4);
+            nameDb = resultSet.getString(2);
+            passDb = resultSet.getString(3);
+            regiddb = resultSet.getString(1);
+            isTeachDb = resultSet.getString(4);
         }
 
-        if(nameDb.equals(name) && passDb.equals(pass)) {
-            regDatas.setIs_teacher(isTeachDb);
-            regDatas.setReg_id(reg_idDb);
-        }
-        else {
+        if (nameDb.equals(name) && passDb.equals(pass)) {
+            regDatas.setIsteacher(isTeachDb);
+            regDatas.setRegid(regiddb);
+        } else {
             throw new SQLException();
         }
 
